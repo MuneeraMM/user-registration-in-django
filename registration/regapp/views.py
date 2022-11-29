@@ -11,10 +11,22 @@ def regi(request):
         phone = request.POST['phone no']
         password1 = request.POST['password1']
         password2 = request.POST['password2']
+        # user = User.objects.create_user(username=fname,last_name=lname,password=password1,email=email)
+        # user.save()
+        # print('user created')
+        # return redirect('/')
+    # else:
+    #     return render(request,'register.html')
+        
+        # for pass=confpass
+        if password1 == password2:
 
-        user = User.objects.create_user(username=fname,last_name=lname,password=password1,email=email)
-        user.save()
-        print('user created')
+            user = User.objects.create_user(username=fname,last_name=lname,password=password1,email=email)
+            user.save()
+            print('user created')
+            
+        else:
+            print("Password does not matching..")
         return redirect('/')
 
     else:
