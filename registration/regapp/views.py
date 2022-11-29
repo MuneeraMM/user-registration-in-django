@@ -19,11 +19,31 @@ def regi(request):
     #     return render(request,'register.html')
         
         # for pass=confpass
-        if password1 == password2:
+    #     if password1 == password2:
 
-            user = User.objects.create_user(username=fname,last_name=lname,password=password1,email=email)
-            user.save()
-            print('user created')
+    #         user = User.objects.create_user(username=fname,last_name=lname,password=password1,email=email)
+    #         user.save()
+    #         print('user created')
+            
+    #     else:
+    #         print("Password does not matching..")
+    #     return redirect('/')
+
+    # else:
+    #     return render(request,'register.html')
+        if password1 == password2:
+            if User.objects.filter(username=fname).exists():
+                print("Username already taken")
+            # else:
+            #     user = User.objects.create_user(username=fname,last_name=lname,password=password1,email=email)
+            #     user.save()
+            #     print('user created')
+            elif User.objects.filter(email=email).exists():
+                print("Email already taken")
+            else:
+                user = User.objects.create_user(username=fname,last_name=lname,password=password1,email=email)
+                user.save()
+                print('user created')
             
         else:
             print("Password does not matching..")
